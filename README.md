@@ -1,6 +1,6 @@
 <div align="center">
   <h1>SubtPlanner</h1>
-  <h3>SubtPlanner: Structure-Guided Sampling and Branch-Aware Repositioning for UAV Autonomous Subterranean Exploration</h3>
+  <h3>Structure-Guided Sampling and Branch-Aware Repositioning for UAV Autonomous Subterranean Exploration</h3>
    <h1> </h1>
 
 
