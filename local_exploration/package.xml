@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>local_exploration</name>
+  <version>0.0.0</version>
+  <description>Local autonomous exploration planner.</description>
+  <maintainer email="ggh@example.com">SubTPlanner Maintainers</maintainer>
+  <license>BSD-3-Clause</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend>catkin_simple</buildtool_depend>
+
+  <depend>roscpp</depend>
+  <depend>cv_bridge</depend>
+  <depend>tf</depend>
+  <depend>geometry_msgs</depend>
+  <depend>visualization_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>std_srvs</depend>
+  <depend>nav_msgs</depend>
+  <depend>pcl_ros</depend>
+  <depend>pcl_conversions</depend>
+  <depend>kdtree</depend>
+  <depend>cognitive_graph_model</depend>
+  <depend>voxel_map</depend>
+  <depend>planner_msgs</depend>
+  <depend>planner_semantic_msgs</depend>
+  <depend>global_repositioning</depend>
+</package>

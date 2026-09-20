@@ -1,0 +1,18 @@
+<root BTCPP_format="4">
+  <include path="../behavior_trees/lge_homing.xml" />
+  <include path="../behavior_trees/active_homing.xml" />
+  <include path="../behavior_trees/lnav.xml" />
+  <include path="../behavior_trees/lge_homing_lnav.xml" />
+  <BehaviorTree ID="MainTree">
+    <Sequence>
+      <ReactiveFallback>
+        <HomingCheck/>
+        <Sequence>
+          <SubTree ID="lge_homing_lnav"/>
+          <AlwaysFailure/>
+        </Sequence>
+      </ReactiveFallback>
+      <SubTree ID="acthoming"/>
+    </Sequence>
+  </BehaviorTree>
+</root>

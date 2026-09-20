@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<launch>
+	<!-- All settings -->
+	<arg name="robot_name" default="rmf_obelix"/>
+	<arg name="config_folder" default="darpa_subt"/>
+	<arg name="gazebo_gui_en" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="rviz_en" default="true" />
+  <arg name="launch_prefix" default=""/> <!-- gdb -ex run //args -->
+  <arg name="rviz_launch_prefix" default="bash -c 'sleep 8; exec &quot;$@&quot;' bash"/>
+  <arg name="show_startup_animation" default="true"/>
+  <param name="use_sim_time" value="$(arg use_sim_time)"/>
+
+	<!-- Config files -->
+	<arg name="config_root" default="$(find subt_planner)/configs"/>
+	<arg name="subt_planner_config_file" default="$(arg config_root)/$(arg config_folder)/subt_planner_config.yaml"/>
+	<arg name="pci_file" default="$(arg config_root)/$(arg config_folder)/planner_control_interface_sim_config.yaml"/>
+	<arg name="voxblox_config_file" default="$(arg config_root)/$(arg config_folder)/voxblox_sim_config.yaml"/>
+	<arg name="map_config_file" default="$(arg voxblox_config_file)"/>
+	<arg name="behavior_tree_file" default="$(arg config_root)/$(arg config_folder)/main_tree.xml"/>
+	<arg name="rviz_config_file" default="$(arg config_root)/$(arg config_folder)/ui.rviz"/>
+
+	<arg name="odometry_topic" default="/rmf_obelix/ground_truth/odometry_throttled"/>
+
+	<!-- Simulation -->
+	<include file="$(find subt_planner_gazebo)/launch/darpa_subt.launch">
+		<arg name="robot_name" value="$(arg robot_name)"/>
+		<arg name="launch_prefix" value="$(arg launch_prefix)"/>
+		<arg name="gazebo_gui_en" value="$(arg gazebo_gui_en)"/>
+		<arg name="use_sim_time" value="$(arg use_sim_time)"/>
+	</include>
+	<!-- Graph based planning -->
+	<node pkg="subt_planner" type="subt_planner_node" name="subt_planner_node" output="screen" launch-prefix="$(arg launch_prefix)">
+		<remap from="odometry" to="$(arg odometry_topic)" />
+		<remap from="/pointcloud" to="/rmf_obelix/velodyne_points" />
+		<remap from="query_point" to="/rmf_obelix/tsdf_query_pt"/>
+		<rosparam command="load" file="$(arg subt_planner_config_file)" />
+		<rosparam command="load" file="$(arg map_config_file)" />
+		<param name="behavior_tree_path" value="$(arg behavior_tree_file)"/>
+		<param name="show_startup_animation" value="$(arg show_startup_animation)"/>
+	</node>
+
+	<!-- Planner and Control Interface -->
+	<node pkg="pci_general" type="pci_general_ros_node" name="pci_general_ros_node" output="screen">
+		<remap from="command/trajectory" to="/rmf_obelix/command/trajectory" />
+		<remap from="planner_server" to="subt_planner_ros" />
+		<remap from="planner_homing_server" to="subt_planner/homing" />
+		<remap from="odometry" to="$(arg odometry_topic)"/>     
+		<rosparam command="load" file="$(arg pci_file)" />
+	</node>
+
+	<!-- Rviz -->
+	<group if="$(arg rviz_en)">
+		<node pkg="rviz" type="rviz" name="subt_planner_rviz" output="screen"
+          launch-prefix="$(arg rviz_launch_prefix)"
+          args="-d $(arg rviz_config_file)"/>
+	</group>
+
+</launch>

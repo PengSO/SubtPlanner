@@ -1,0 +1,42 @@
+# Catkin workspaces
+/build/
+/devel/
+/install/
+/logs/
+.catkin_tools/
+
+# ROS and Gazebo runtime files
+*.bag
+*.db3
+*.pcd
+*.ply
+*.bt
+*.log
+*.tmp
+.gazebo/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Large subterranean scene assets should be distributed through Git LFS,
+# a release archive, Zenodo, or a separate assets repository.
+# Keep the lightweight corridor demo if desired, but do not commit full scenes
+# into the main planner repository.
+simulation/subt_planner_world_assets/.catkin_tools/
+simulation/subt_planner_world_assets/models/megacavern/
+simulation/subt_planner_world_assets/models/niosh_seg01/
+simulation/subt_planner_world_assets/models/Cave*/
+simulation/subt_planner_world_assets/models/Base Station/
+simulation/subt_planner_world_assets/models/JanSport Backpack Red/
+simulation/subt_planner_world_assets/models/Rescue Randy Sitting/
+simulation/subt_planner_world_assets/models/Samsung J8 Black/
+
+# Keep the corridor demo model available for the default quick start.
+!simulation/subt_planner_world_assets/models/underground_corridor/

@@ -1,0 +1,9 @@
+<library path="lib/libsubt_planner_rviz_panel">
+  <class name="subt_planner_rviz_panel/SubtPlanner Exploration Panel"
+         type="subt_planner_rviz_panel::SubtPlannerControl"
+         base_class_type="rviz::Panel">
+    <description>
+      RViz control panel for SubtPlanner.
+    </description>
+  </class>
+</library>

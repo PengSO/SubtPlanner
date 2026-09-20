@@ -1,0 +1,194 @@
+# Urban corridor autonomous exploration demo.
+# The compact demo profile is paired with subt_planner_config_advanced.yaml for extended experiments.
+
+RobotParams:
+  type:               kAerialRobot
+  size:               [0.3, 0.3, 0.3]
+  size_extension_min: [0.0, 0.0, 0.0]
+  size_extension:     [0.1, 0.1, 0.1]
+  center_offset:      [0.0, 0.0, 0.0]
+  relax_ratio:        0.5
+  bound_mode:         kExtendedBound
+  safety_extension:   [0.5, 1.5, 1.5]
+
+SensorParams:
+  sensor_list: ["OS064"]
+  OS064:
+    type:           kLidar
+    max_range:      20
+    center_offset:  [0.0, 0.0, 0.0]
+    rotations:      [0.0, 0.0, 0.0]
+    fov:            [rad(2*pi), rad(90*pi/180)]
+    resolution:     [rad(10.0*pi/180), rad(10.0*pi/180)]
+    frontier_percentage_threshold: 0.01
+
+BoundedSpaceParams:
+  Global:
+    type:           kCuboid
+    min_val:        [-70.0, -20.0, -2.5]
+    max_val:        [70.0, 240.0, 3.5]
+  Local:
+    type:           kCylinder
+    min_val:        [-15.0, -15.0, -1.0]
+    max_val:        [15.0, 15.0, 1.0]
+    min_extension:  [-85.0, -45.0, -10.0]
+    max_extension:  [85.0, 45.0, 10.0]
+    radius:         15.0
+    radius_extension: 20.0
+  LocalSearch:
+    type:           kCuboid
+    min_val:        [-70.0, -50.0, -1.8]
+    max_val:        [70.0, 50.0, 1.8]
+
+RandomSamplerParams:
+  SamplerForExploration:
+    X:
+      pdf_type:       kNormalUniform
+      sample_mode:    kLocal
+      std_val:        7.5
+    Y:
+      pdf_type:       kNormalUniform
+      sample_mode:    kLocal
+      std_val:        7.5
+    Z:
+      pdf_type:       kNormalUniform
+      sample_mode:    kLocal
+      std_val:        7.5
+    Heading:
+      pdf_type:       kUniform
+      sample_mode:    kManual
+      min_val:        rad(-pi)
+      max_val:        rad(pi)
+    Pitch:
+      pdf_type:       kConst
+      sample_mode:    kManual
+      const_val:      0.0
+
+  SamplerForSearching:
+    X:
+      pdf_type:       kUniform
+      sample_mode:    kLocal
+    Y:
+      pdf_type:       kUniform
+      sample_mode:    kLocal
+    Z:
+      pdf_type:       kUniform
+      sample_mode:    kLocal
+    Heading:
+      pdf_type:       kUniform
+      sample_mode:    kManual
+      min_val:        rad(-pi)
+      max_val:        rad(pi)
+    Pitch:
+      pdf_type:       kConst
+      sample_mode:    kManual
+      const_val:      0.0
+
+PlanningParams:
+  # Cognitive map
+  type:                          kBasicExploration
+  exploration_graph_mode:        kGraph
+  exploration_graph_update_mode: kBatch
+  exploration_sensor_list:       ["OS064"]
+  global_frame_id:               world
+  v_max:                         1.0
+  v_homing_max:                  0.9
+  yaw_rate_max:                  0.9
+  yaw_tangent_correction:        false
+  edge_length_min:               0.1
+  edge_length_max:               3.0
+  edge_overshoot:                0.0
+  exploration_vertex_budget:     500
+  exploration_edge_budget:       10000
+  num_loops_cutoff:              2000
+  num_loops_max:                 7000
+  nearest_range:                 3.0
+  nearest_range_min:             0.1
+  nearest_range_max:             3.0
+  use_current_state:             true
+  topological_anchor_z_offset:   0.2
+  topological_node_spacing:      1.0
+  topological_connection_radius: 3.0
+  topological_frontiers_only:    true
+
+  # Local exploration
+  traverse_length_max:               10.0
+  traverse_time_max:                 5000.0
+  path_safety_enhance_enable:        true
+  augment_free_voxels_time:          3
+  free_frustum_before_planning:      false
+  freespace_cloud_enable:            false
+  passage_guided_sampling_enable:    true
+  disable_passage_guided_sampling:   false
+  directional_candidate_batch_size:  2
+  passage_axis_sampling_ratio:       0.35
+  passage_lateral_sampling_scale:    0.6
+  passage_backward_sampling_scale:   0.4
+  sample_axis_alignment_weight:      0.4
+  sample_clearance_weight:           0.6
+  sample_goal_alignment_weight:      0.25
+  sample_same_zone_bonus:            0.2
+  local_path_smoothing_enable:       true
+  local_path_smoothing_iterations:   1
+  local_path_smoothing_min_segment:  0.25
+  leafs_only_for_volumetric_gain:    false
+  cluster_vertices_for_gain:         false
+  clustering_radius:                 0.5
+  path_interpolation_distance:       -1.0
+
+  # Sensor gain model
+  use_ray_model_for_volumetric_gain: true
+  exp_gain_voxel_size:               0.8
+  occupied_voxel_gain:               0.0
+  free_voxel_gain:                   0.0
+  unknown_voxel_gain:                60.0
+  nonuniform_ray_cast:               false
+  ray_cast_step_size_multiplier:     1.0
+  fine_gain_evaluation_enable:       true
+  fine_gain_top_k:                   80
+  fine_gain_candidate_ratio:         0.4
+
+  # Global repositioning
+  auto_global_planner_enable:        true
+  time_budget_limit:                 5000
+  auto_homing_enable:                false
+  go_home_if_fully_explored:         false
+  select_closest_frontier:           false
+  repositioning_goal_hysteresis_enable: true
+  repositioning_goal_hysteresis_ratio:  1.15
+  branch_aware_repositioning_enable:    true
+  branch_region_selection_count:         2
+  branch_memory_alpha:                   0.25
+  branch_frontier_scale_weight:          1.0
+  branch_compactness_weight:             1.0
+  branch_success_memory_weight:          1.0
+  repositioning_time_weight:             1.0
+  dead_zone_escape_enable:               true
+  dead_zone_min_low_gain_iters:          3
+  dead_zone_max_branch_degree:           1
+  dead_zone_front_clearance:             1.0
+  dead_zone_region_radius:               3.0
+  dead_zone_penalty_lambda:              0.2
+  dead_zone_turn_radius:                 1.0
+  dead_zone_turn_clearance:              0.35
+  dead_zone_turn_step:                   0.5
+  dead_zone_escape_prefix_length:        1.0
+  shortcut_edges_enable:                 true
+  shortcut_edge_radius:                  4.5
+  shortcut_detour_ratio:                 1.35
+  shortcut_min_clearance:                0.35
+
+  # Disabled extension hooks
+  inspection_planning:              false
+  use_camera_gain:                  false
+  annotate_map_with_camera:         false
+  enable_opening_traversal:         false
+  only_opening_traversal:           false
+  geofence_checking_enable:         false
+  auto_landing_enable:              false
+  exploration_only:                 true
+
+RepositioningRegionParams:
+  type: kPca
+  local_pointcloud_range: 50.0
+  bounding_box_size_max: 35
