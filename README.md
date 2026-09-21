@@ -16,6 +16,21 @@
   <img src="../docs/assets/method_overview.jpg" width="640" alt="SubtPlanner method overview"/>
 </p>
 
+
+## Contents
+
+- [Overview](#overview)
+- [Method](#method)
+- [Quick Start](#quick-start)
+- [Expected Result](#expected-result)
+- [Code Organization](#code-organization)
+- [Configuration](#configuration)
+- [Known Issues](#known-issues)
+- [Roadmap](#roadmap)
+- [Development Notes](#development-notes)
+- [Citation](#citation)
+- [Acknowledgements](#acknowledgements)
+
 ## Overview
 
 **SubtPlanner** is a cognitive-map-based hierarchical active planner for UAV autonomous exploration in subterranean environments. It couples short-horizon local exploration with long-term topological memory, allowing the robot to keep exploring efficiently in long corridors, branch-rich tunnels, caves, and dead-end-prone spaces.
@@ -73,19 +88,6 @@ When local exploration becomes low-gain or trapped, global repositioning reasons
   <img src="../docs/assets/simulation_trajectories_maps.jpg" width="640" alt="Exploration trajectories and maps"/>
 </p>
 
-## Contents
-
-- [Overview](#overview)
-- [Method](#method)
-- [Quick Start](#quick-start)
-- [Expected Result](#expected-result)
-- [Code Organization](#code-organization)
-- [Configuration](#configuration)
-- [Known Issues](#known-issues)
-- [Roadmap](#roadmap)
-- [Development Notes](#development-notes)
-- [Citation](#citation)
-- [Acknowledgements](#acknowledgements)
 
 ## Quick Start
 
