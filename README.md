@@ -172,7 +172,7 @@ If the repository is cloned as a folder named `SubtPlanner`, use this layout ins
 ```bash
 mkdir -p ~/SubtPlanner_ws/src
 cd ~/SubtPlanner_ws/src
-git clone <SUBTPLANNER_REPOSITORY_URL> SubtPlanner
+git clone https://github.com/PengSO/SubtPlanner SubtPlanner
 ```
 
 ### 3. Simulation Assets
