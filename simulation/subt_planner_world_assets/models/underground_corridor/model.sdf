@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="underground_corridor">
+    <static>true</static>
+    <link name="base_link">
+      <collision name="collision">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <!-- STL is the most reliable Gazebo import path for this workspace. -->
+            <uri>meshes/underground_corridor.stl</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+        <max_contacts>10</max_contacts>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <bounce/>
+          <friction>
+            <torsional>
+              <ode/>
+            </torsional>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+
+      <visual name="visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <!-- Use a double-sided visual mesh so tunnel interiors stay visible in Gazebo. -->
+            <uri>meshes/underground_corridor_visual.stl</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.75 0.75 0.75 1.0</ambient>
+          <diffuse>0.75 0.75 0.75 1.0</diffuse>
+          <specular>0.05 0.05 0.05 1.0</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>
