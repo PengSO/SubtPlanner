@@ -5,7 +5,7 @@
 
 <p align="center">
   <a href="VIDEO_URL"><img alt="Video" src="https://img.shields.io/badge/Video-YouTube-ff0033"/></a>
-  <a href="PAPER_URL"><img alt="Paper" src="https://img.shields.io/badge/Paper-ICRA%202027-2f80ed"/></a>
+  <a href="PAPER_URL"><img alt="Paper" src="https://img.shields.io/badge/Paper-%202027-2f80ed"/></a>
 </p>
 
 ## ✨ Overview
@@ -168,7 +168,7 @@ If this project supports your research, please cite the associated paper:
 @inproceedings{subtplanner2027,
   title = {SubtPlanner: Structure-Guided Sampling and Branch-Aware Repositioning for UAV Autonomous Subterranean Exploration},
   author = {Peng, Song and Zhang, Hao and Li, Han and Jiang, Weicheng and Gou, Guohua and Sui, Haigang},
-  booktitle = {IEEE International Conference on Robotics and Automation},
+  booktitle = {},
   year = {2027}
 }
 ```
