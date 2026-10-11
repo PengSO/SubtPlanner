@@ -3,7 +3,7 @@ set -euo pipefail
 
 WORKSPACE_DIR="${1:-$(pwd)}"
 if [[ ! -d "${WORKSPACE_DIR}/src" ]]; then
-  echo "ERROR: pass the workspace root, for example: scripts/build_subtplanner.sh ~/SubtPlanner_ws" >&2
+  echo "ERROR: pass the workspace root, for example: src/SubtPlanner/scripts/build_subtplanner.sh ~/SubtPlanner_ws" >&2
   exit 1
 fi
 
@@ -15,4 +15,4 @@ rosdep install --from-paths src --ignore-src -r -y
 catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release
 catkin build
 source devel/setup.bash
-"${WORKSPACE_DIR}/src/scripts/check_runtime_env.sh" "${WORKSPACE_DIR}"
+"${SCRIPT_DIR}/check_runtime_env.sh" "${WORKSPACE_DIR}"
