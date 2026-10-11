@@ -176,4 +176,4 @@ We thank the following projects for their valuable influence on subterranean exp
 - [OmniPlanner](https://github.com/ntnu-arl/gbplanner_ros)
 - [SuperLoc](https://superodometry.com/superloc)
 - [voxblox](https://github.com/ethz-asl/voxblox)
-- DARPA SubT Challenge / Open Robotics official simulation assets
+- [DARPA SubT Challenge](https://www.darpa.mil/research/challenges/subterranean)
