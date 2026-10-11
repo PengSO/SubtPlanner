@@ -58,10 +58,6 @@ sudo apt install -y \
   libboost-all-dev libeigen3-dev libgoogle-glog-dev libgflags-dev \
   libprotobuf-dev protobuf-compiler libyaml-cpp-dev libsqlite3-dev libzmq3-dev \
   libpcl-dev libopencv-dev qtbase5-dev
-
-git lfs install
-gazebo --version
-pkg-config --modversion gazebo
 ```
 
 ### 📥 2. Create Workspace
@@ -73,7 +69,7 @@ git clone https://github.com/PengSO/SubtPlanner.git
 
 # Download external simulation dependency: rotors_simulator 
 cd SubtPlanner/simulation
-git clone https://github.com/ethz-asl/rotors_simulator.git
+git clone https://github.com/PengSO/rotors_simulator.git
 cd ..
 ```
 
