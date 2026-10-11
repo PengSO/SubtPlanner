@@ -67,7 +67,7 @@ mkdir -p ~/SubtPlanner_ws/src
 cd ~/SubtPlanner_ws/src
 git clone https://github.com/PengSO/SubtPlanner.git
 
-# Download external simulation dependency: rotors_simulator 
+# Download simulation dependency: rotors_simulator 
 cd SubtPlanner/simulation
 git clone https://github.com/PengSO/rotors_simulator.git
 cd ..
@@ -97,7 +97,6 @@ cd ~/SubtPlanner_ws
 ```bash
 cd ~/SubtPlanner_ws
 source ./src/SubtPlanner/scripts/setup_gazebo_classic_env.sh
-rosdep install --from-paths src --ignore-src -r -y
 catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release
 catkin build
 source devel/setup.bash
