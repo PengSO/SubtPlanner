@@ -100,7 +100,7 @@ cd ~/SubtPlanner_ws
 
 ```bash
 cd ~/SubtPlanner_ws
-source ./src/scripts/setup_gazebo_classic_env.sh
+source ./src/SubtPlanner/scripts/setup_gazebo_classic_env.sh
 rosdep install --from-paths src --ignore-src -r -y
 catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release
 catkin build
