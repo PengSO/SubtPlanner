@@ -72,7 +72,7 @@ cd ~/SubtPlanner_ws/src
 git clone https://github.com/PengSO/SubtPlanner.git
 
 # Download external simulation dependency: rotors_simulator 
-cd simulation
+cd SubtPlanner/simulation
 git clone https://github.com/ethz-asl/rotors_simulator.git
 cd ..
 ```
